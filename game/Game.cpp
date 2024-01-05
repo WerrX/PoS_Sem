@@ -86,4 +86,5 @@ void Game::drawScore(sf::RenderWindow &window){
 
     this->window.draw(player1ScoreText);
     this->window.draw(player2ScoreText);
+    //aa
 }
