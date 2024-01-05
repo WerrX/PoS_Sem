@@ -1,0 +1,3 @@
+C:/Users/Pavol Dendis/Desktop/sem Posko/sem3.0/sem/sem/cmake-build-debug/CMakeFiles/sem.dir
+C:/Users/Pavol Dendis/Desktop/sem Posko/sem3.0/sem/sem/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Pavol Dendis/Desktop/sem Posko/sem3.0/sem/sem/cmake-build-debug/CMakeFiles/rebuild_cache.dir
