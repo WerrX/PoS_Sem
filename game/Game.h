@@ -16,10 +16,7 @@ class Game {
 private:
     Ball ball;
 
-    //int player1Score = 0;
-    //int player2Score = 0;
-
-    //zmena
+   //zmena
     sf::Font font;
     sf::Text player1ScoreText;
     sf::Text player2ScoreText;
@@ -49,4 +46,8 @@ public:
     void initlizeScore();
 
     void drawScore(sf::RenderWindow &window);
+
+    void endGame(int endScore);
+
+    void EndScrean(unsigned char gameIsOver);
 };

@@ -1,6 +1,7 @@
 #include <filesystem>
 #include <iostream>
 #include "Game.h"
+#include <windows.h>
 
 Game::Game(GameState &gameState, sf::RenderWindow &window) :
     window(window),
@@ -18,6 +19,7 @@ void Game::update() {
     this->player2.update(globalBounds);
     this->ball.update(globalBounds, this->player1, this->player2);
     drawScore(window);
+    endGame(1);
 }
 
 void Game::draw() {
@@ -46,17 +48,46 @@ Direction Game::translateDirection(sf::Keyboard::Key &keyPressed, int playerInde
 void Game::setPlayer1Score(int score) {
     this-> gameState.player1.score += score;
 }
-
 void Game::setPlayer2Score(int score) {
     this-> gameState.player2.score += score;
 }
-
 int Game::getPlayer1Score() const {
     return this-> gameState.player1.score ;
 }
-
 int Game::getPlayer2Score() const {
     return this-> gameState.player2.score;
+}
+//void Game::endGame(int endScore){
+//    int endGoal = endScore;
+//    if (gameState.player1.score == endScore)  {
+//        MessageBoxA(NULL, "EndGame wins: Player2", "PinPong", MB_OK);
+//
+//    }
+//    if (gameState.player2.score == endScore){
+//        MessageBoxA(NULL, "EndGame wins: Player1", "PinPong", MB_OK);
+//        gameState.windowMutex;
+//    }
+//}
+
+//uprava
+void Game::endGame(int endScore) {
+    const std::string& winnerMessage = (gameState.player1.score == endScore) ? "Player2 wins!" :
+                                       (gameState.player2.score == endScore) ? "Player1 wins!" : "";
+
+    if (!winnerMessage.empty()) {
+        MessageBoxA(NULL, winnerMessage.c_str(), "EndGame", MB_OK );
+        window.close();
+    }
+}
+
+void Game::EndScrean(boolean gameIsOver){
+    sf::Window windowA(sf::VideoMode(600,300), "Game Over");
+
+    while (gameIsOver)
+    {
+        windowA.isOpen();
+
+    }
 }
 
 //zmena
@@ -68,8 +99,6 @@ void Game::initlizeScore(){
     this->player2ScoreText.setFont(font);
     this->player2ScoreText.setCharacterSize(24);
     this->player2ScoreText.setFillColor(sf::Color::White);
-
-
 }
 //zmena
 void Game::drawScore(sf::RenderWindow &window){
@@ -86,5 +115,4 @@ void Game::drawScore(sf::RenderWindow &window){
 
     this->window.draw(player1ScoreText);
     this->window.draw(player2ScoreText);
-    //aa
 }
