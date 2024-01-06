@@ -57,17 +57,6 @@ int Game::getPlayer1Score() const {
 int Game::getPlayer2Score() const {
     return this-> gameState.player2.score;
 }
-//void Game::endGame(int endScore){
-//    int endGoal = endScore;
-//    if (gameState.player1.score == endScore)  {
-//        MessageBoxA(NULL, "EndGame wins: Player2", "PinPong", MB_OK);
-//
-//    }
-//    if (gameState.player2.score == endScore){
-//        MessageBoxA(NULL, "EndGame wins: Player1", "PinPong", MB_OK);
-//        gameState.windowMutex;
-//    }
-//}
 
 //uprava
 void Game::endGame(int endScore) {
@@ -77,16 +66,6 @@ void Game::endGame(int endScore) {
     if (!winnerMessage.empty()) {
         MessageBoxA(NULL, winnerMessage.c_str(), "EndGame", MB_OK );
         window.close();
-    }
-}
-
-void Game::EndScrean(boolean gameIsOver){
-    sf::Window windowA(sf::VideoMode(600,300), "Game Over");
-
-    while (gameIsOver)
-    {
-        windowA.isOpen();
-
     }
 }
 
