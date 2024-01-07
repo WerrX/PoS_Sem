@@ -2,6 +2,7 @@
 
 Singleplayer::Singleplayer(GameState &gameState, sf::RenderWindow &window) : Game(gameState, window) {}
 
+// bool skoncilaHra
 void Singleplayer::start() {
     while (this->window.isOpen())
     {
@@ -20,5 +21,6 @@ void Singleplayer::start() {
         draw();
 
         this->window.display();
+       if(endGame(3))return;
     }
 }

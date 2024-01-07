@@ -25,6 +25,7 @@ int main()
 
     Menu menu;
 
+
     bool exit = false;
     while (!exit) {
         MenuState menuState = menu.handleMenu(window);

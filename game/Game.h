@@ -47,7 +47,7 @@ public:
 
     void drawScore(sf::RenderWindow &window);
 
-    void endGame(int endScore);
+    bool endGame(int endScore);
 
-    void EndScrean(unsigned char gameIsOver);
+    bool EndScrean(unsigned char gameIsOver);
 };

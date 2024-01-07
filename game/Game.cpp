@@ -19,7 +19,6 @@ void Game::update() {
     this->player2.update(globalBounds);
     this->ball.update(globalBounds, this->player1, this->player2);
     drawScore(window);
-    endGame(1);
 }
 
 void Game::draw() {
@@ -58,18 +57,17 @@ int Game::getPlayer2Score() const {
     return this-> gameState.player2.score;
 }
 
-//uprava
-void Game::endGame(int endScore) {
+bool Game::endGame(int endScore) {
     const std::string& winnerMessage = (gameState.player1.score == endScore) ? "Player2 wins!" :
                                        (gameState.player2.score == endScore) ? "Player1 wins!" : "";
 
     if (!winnerMessage.empty()) {
         MessageBoxA(NULL, winnerMessage.c_str(), "EndGame", MB_OK );
-        window.close();
+        return true;
     }
+    return false;
 }
 
-//zmena
 void Game::initlizeScore(){
     this->player1ScoreText.setFont(font);
     this->player1ScoreText.setCharacterSize(24);
@@ -79,7 +77,7 @@ void Game::initlizeScore(){
     this->player2ScoreText.setCharacterSize(24);
     this->player2ScoreText.setFillColor(sf::Color::White);
 }
-//zmena
+
 void Game::drawScore(sf::RenderWindow &window){
     std::filesystem::path path = std::filesystem::current_path();
     if(!font.loadFromFile(path.string() + "\\font\\arial.ttf"))
