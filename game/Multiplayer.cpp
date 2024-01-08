@@ -26,6 +26,7 @@ void Multiplayer::start() {
         draw();
 
         this->window.display();
+        if(endGame(1))return;
     }
 }
 

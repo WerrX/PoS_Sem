@@ -1,6 +1,7 @@
 #include <filesystem>
 #include <iostream>
 #include "Game.h"
+#include <windows.h>
 
 Game::Game(GameState &gameState, sf::RenderWindow &window) :
     window(window),
@@ -46,20 +47,27 @@ Direction Game::translateDirection(sf::Keyboard::Key &keyPressed, int playerInde
 void Game::setPlayer1Score(int score) {
     this-> gameState.player1.score += score;
 }
-
 void Game::setPlayer2Score(int score) {
     this-> gameState.player2.score += score;
 }
-
 int Game::getPlayer1Score() const {
     return this-> gameState.player1.score ;
 }
-
 int Game::getPlayer2Score() const {
     return this-> gameState.player2.score;
 }
 
-//zmena
+bool Game::endGame(int endScore) {
+    const std::string& winnerMessage = (gameState.player1.score == endScore) ? "Player2 wins!" :
+                                       (gameState.player2.score == endScore) ? "Player1 wins!" : "";
+
+    if (!winnerMessage.empty()) {
+        MessageBoxA(NULL, winnerMessage.c_str(), "EndGame", MB_OK );
+        return true;
+    }
+    return false;
+}
+
 void Game::initlizeScore(){
     this->player1ScoreText.setFont(font);
     this->player1ScoreText.setCharacterSize(24);
@@ -68,10 +76,8 @@ void Game::initlizeScore(){
     this->player2ScoreText.setFont(font);
     this->player2ScoreText.setCharacterSize(24);
     this->player2ScoreText.setFillColor(sf::Color::White);
-
-
 }
-//zmena
+
 void Game::drawScore(sf::RenderWindow &window){
     std::filesystem::path path = std::filesystem::current_path();
     if(!font.loadFromFile(path.string() + "\\font\\arial.ttf"))
