@@ -9,8 +9,11 @@ void NetworkManager::setHostAddress(sf::IpAddress &address) {
     this->hostAddress = address;
 }
 
-void NetworkManager::closeConnections() {
+void NetworkManager::closeSocket() {
     this->socket.disconnect();
+}
+
+void NetworkManager::closeListener() {
     this->listener.close();
 }
 

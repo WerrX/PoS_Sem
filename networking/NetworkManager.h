@@ -22,7 +22,8 @@ public:
     NetworkManager();
 
     void setHostAddress(sf::IpAddress &address);
-    void closeConnections();
+    void closeSocket();
+    void closeListener();
 
     bool startListening();
     bool connectToIpAddress();

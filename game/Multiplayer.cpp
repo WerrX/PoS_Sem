@@ -7,6 +7,8 @@ Multiplayer::Multiplayer(GameState &gameState, NetworkManager &networkManager, s
 }
 
 void Multiplayer::start() {
+    this->syncBallState();
+
     sf::Thread retrieveThread(&Multiplayer::retrieveThread, this);
     retrieveThread.launch();
     while (this->window.isOpen())
@@ -26,11 +28,37 @@ void Multiplayer::start() {
         draw();
 
         this->window.display();
-        if (endGame(1)) {
-            this->networkManager.closeConnections();
+        if (endGame(3)) {
+            retrieveThread.terminate();
+            this->closeConnections();
             return;
         }
     }
+}
+
+void Multiplayer::closeConnections() {
+    if (this->gameMode == CREATE) {
+        this->networkManager.closeListener();
+        this->networkManager.closeSocket();
+    } else if (this->gameMode == FIND) {
+        this->networkManager.closeSocket();
+    }
+}
+
+bool Multiplayer::syncBallState() {
+    if (this->gameMode == CREATE) {
+        bool sentState = this->networkManager.send(this->gameState.ball);
+        return sentState;
+    } else if (this->gameMode == FIND) {
+        std::optional<BallState> ballState = this->networkManager.retrieve<BallState>();
+        if (ballState.has_value()) {
+            this->gameState.ball = *ballState;
+            return true;
+        } else {
+            return false;
+        }
+    }
+    return false;
 }
 
 void* Multiplayer::retrieveThread(void* arg) {

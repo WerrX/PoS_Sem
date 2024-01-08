@@ -19,17 +19,16 @@ int main()
     bool up = getRandomBoolean();
     bool left = getRandomBoolean();
 
-    PlayerState player1 = {false, false, {10.0f, 200.0f},0};
-    PlayerState player2 = {false, false, {990.0f, 200.0f},0};
-    BallState ball = {up, !left, !up, left, {500.0f, 308.0f}};
-    GameState gameState = {player1, player2, ball};
-
     Menu menu;
-
 
     bool exit = false;
     while (!exit) {
         MenuState menuState = menu.handleMenu(window);
+
+        PlayerState player1 = {false, false, {10.0f, 200.0f},0};
+        PlayerState player2 = {false, false, {990.0f, 200.0f},0};
+        BallState ball = {up, !left, !up, left, {500.0f, 308.0f}};
+        GameState gameState = {player1, player2, ball};
 
         if (menuState == SINGLEPLAYER) {
             Singleplayer game(gameState, window);
@@ -39,7 +38,6 @@ int main()
             Multiplayer game(gameState, networkManager, window);
 
             bool connectionEstablished = false;
-//            implemetacia unable to connect
             bool alreadyTriedToConnect = false;
             while (!connectionEstablished) {
                 ModeSelect modeSelect;

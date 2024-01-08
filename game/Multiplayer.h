@@ -24,7 +24,9 @@ public:
     void keyHandler(sf::Keyboard::Key &keyPressed, bool pressed, bool send);
     void displayInfo(std::string pText);
     void sendPlayerState();
+    void closeConnections();
 
+    bool syncBallState();
     sf::Keyboard::Key filterKeyCode(sf::Keyboard::Key &keyPressed);
     bool initializeConnection(MultiPlayerGameMode mode);
 };
