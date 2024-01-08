@@ -27,7 +27,6 @@ bool NetworkManager::startListening() {
 
 bool NetworkManager::connectToIpAddress() {
     sf::Socket::Status status = this->socket.connect(this->hostAddress, this->portNumber);
-    std::cout << status;
     if (status == sf::Socket::Done) {
         return true;
     }
