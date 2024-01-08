@@ -20,5 +20,6 @@ void Singleplayer::start() {
         draw();
 
         this->window.display();
+        if (endGame(3)) return;
     }
 }

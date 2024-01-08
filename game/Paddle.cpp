@@ -28,7 +28,6 @@ void Paddle::update(sf::Vector2u &globalBounds) {
     this->setPosition(nextPosition);
 }
 
-//zmena---------------------------------------------------
 void Paddle::setScore(){
     this->playerState.score += 1;
 }

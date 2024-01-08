@@ -1,6 +1,7 @@
 #include <filesystem>
 #include <iostream>
 #include "Game.h"
+#include <windows.h>
 
 Game::Game(GameState &gameState, sf::RenderWindow &window) :
     window(window),
@@ -9,7 +10,7 @@ Game::Game(GameState &gameState, sf::RenderWindow &window) :
     ball(3.0f, {20.0f, 20.0f}, gameState.ball),
     gameState(gameState) {
     this->window.setFramerateLimit(150);
-    initlizeScore();
+    this->initializeScore();
 }
 
 void Game::update() {
@@ -17,7 +18,7 @@ void Game::update() {
     this->player1.update(globalBounds);
     this->player2.update(globalBounds);
     this->ball.update(globalBounds, this->player1, this->player2);
-    drawScore(window);
+    this->drawScore(window);
 }
 
 void Game::draw() {
@@ -43,24 +44,25 @@ Direction Game::translateDirection(sf::Keyboard::Key &keyPressed, int playerInde
     return INVALID_DIRECTION;
 }
 
-void Game::setPlayer1Score(int score) {
-    this-> gameState.player1.score += score;
-}
-
-void Game::setPlayer2Score(int score) {
-    this-> gameState.player2.score += score;
-}
-
 int Game::getPlayer1Score() const {
-    return this-> gameState.player1.score ;
+    return this->gameState.player1.score ;
 }
-
 int Game::getPlayer2Score() const {
-    return this-> gameState.player2.score;
+    return this->gameState.player2.score;
 }
 
-//zmena
-void Game::initlizeScore(){
+bool Game::endGame(int endScore) {
+    const std::string& winnerMessage = (this->gameState.player1.score == endScore) ? "Player2 wins!" :
+                                       (this->gameState.player2.score == endScore) ? "Player1 wins!" : "";
+
+    if (!winnerMessage.empty()) {
+        MessageBoxA(NULL, winnerMessage.c_str(), "EndGame", MB_OK );
+        return true;
+    }
+    return false;
+}
+
+void Game::initializeScore(){
     this->player1ScoreText.setFont(font);
     this->player1ScoreText.setCharacterSize(24);
     this->player1ScoreText.setFillColor(sf::Color::White);
@@ -68,10 +70,8 @@ void Game::initlizeScore(){
     this->player2ScoreText.setFont(font);
     this->player2ScoreText.setCharacterSize(24);
     this->player2ScoreText.setFillColor(sf::Color::White);
-
-
 }
-//zmena
+
 void Game::drawScore(sf::RenderWindow &window){
     std::filesystem::path path = std::filesystem::current_path();
     if(!font.loadFromFile(path.string() + "\\font\\arial.ttf"))

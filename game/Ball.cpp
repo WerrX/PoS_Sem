@@ -19,9 +19,8 @@ void Ball::update(sf::Vector2u &globalBounds, Paddle player, Paddle player1) {
     if (!collidedDirections.empty()) {
         for (const auto& direction : collidedDirections) {
             this->setDirection(direction);
-            //zmena
             if (direction == RIGHT) player.setScore();
-            if (direction == LEFT)player1.setScore();
+            if (direction == LEFT )player1.setScore();
         }
         nextPosition = this->getPosition();
     }
