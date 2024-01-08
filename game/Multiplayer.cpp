@@ -69,6 +69,8 @@ void* Multiplayer::retrieveThread(void* arg) {
             instance->setPlayerState(*playerState);
         }
     }
+
+    return nullptr;
 }
 
 void Multiplayer::keyHandler(sf::Keyboard::Key &keyPressed, bool pressed, bool send) {
