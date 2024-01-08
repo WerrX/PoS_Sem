@@ -40,15 +40,15 @@ int main()
 
             bool connectionEstablished = false;
 //            implemetacia unable to connect
-//            bool alreadyTriedToConnect = false;
+            bool alreadyTriedToConnect = false;
             while (!connectionEstablished) {
                 ModeSelect modeSelect;
-                MultiPlayerGameMode gameMode = modeSelect.handleMenu(window);
+                MultiPlayerGameMode gameMode = modeSelect.handleMenu(window, alreadyTriedToConnect);
 
                 if (gameMode == BACK) break;
 
                 connectionEstablished = game.initializeConnection(gameMode);
-//                alreadyTriedToConnect = true;
+                alreadyTriedToConnect = true;
             }
             if (connectionEstablished) game.start();
         } else if (menuState == EXIT) {

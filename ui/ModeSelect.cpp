@@ -5,7 +5,7 @@ ModeSelect::ModeSelect() :
         joinGameButton(410.0f, 250.0f, 200.0f, 50.0f, "Find Game"),
         exitButton(410.0f, 350.0f, 200.0f, 50.0f, "Back") {}
 
-MultiPlayerGameMode ModeSelect::handleMenu(sf::RenderWindow &window) {
+MultiPlayerGameMode ModeSelect::handleMenu(sf::RenderWindow &window, bool secondTime) {
     while (window.isOpen()) {
         sf::Event event{};
 
@@ -20,6 +20,10 @@ MultiPlayerGameMode ModeSelect::handleMenu(sf::RenderWindow &window) {
         }
 
         window.clear();
+
+        if (secondTime) {
+            this->displayInfo("Unable to connect", window);
+        }
 
         draw(window);
 
@@ -40,4 +44,20 @@ void ModeSelect::draw(sf::RenderWindow &window) {
     this->createGameButton.draw(window);
     this->joinGameButton.draw(window);
     this->exitButton.draw(window);
+}
+
+void ModeSelect::displayInfo(std::string pText, sf::RenderWindow &window) {
+    sf::Text text;
+    sf::Font font;
+    std::filesystem::path path = std::filesystem::current_path();
+    if(!font.loadFromFile(path.string() + "\\font\\arial.ttf"))
+    {
+        std::cout << "can't load font" << std::endl;
+    }
+    text.setFont(font);
+    text.setString(pText);
+    text.setCharacterSize(24);
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+    window.draw(text);
 }

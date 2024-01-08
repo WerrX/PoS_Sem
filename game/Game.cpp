@@ -10,7 +10,7 @@ Game::Game(GameState &gameState, sf::RenderWindow &window) :
     ball(3.0f, {20.0f, 20.0f}, gameState.ball),
     gameState(gameState) {
     this->window.setFramerateLimit(150);
-    initlizeScore();
+    this->initializeScore();
 }
 
 void Game::update() {
@@ -18,7 +18,7 @@ void Game::update() {
     this->player1.update(globalBounds);
     this->player2.update(globalBounds);
     this->ball.update(globalBounds, this->player1, this->player2);
-    drawScore(window);
+    this->drawScore(window);
 }
 
 void Game::draw() {
@@ -44,12 +44,6 @@ Direction Game::translateDirection(sf::Keyboard::Key &keyPressed, int playerInde
     return INVALID_DIRECTION;
 }
 
-void Game::setPlayer1Score(int score) {
-    this->gameState.player1.score += score;
-}
-void Game::setPlayer2Score(int score) {
-    this->gameState.player2.score += score;
-}
 int Game::getPlayer1Score() const {
     return this->gameState.player1.score ;
 }
@@ -68,7 +62,7 @@ bool Game::endGame(int endScore) {
     return false;
 }
 
-void Game::initlizeScore(){
+void Game::initializeScore(){
     this->player1ScoreText.setFont(font);
     this->player1ScoreText.setCharacterSize(24);
     this->player1ScoreText.setFillColor(sf::Color::White);

@@ -33,13 +33,10 @@ public:
 
     static Direction translateDirection(sf::Keyboard::Key &keyPressed, int playerIndex);
 
-    void setPlayer1Score(int score);
-    void setPlayer2Score(int score);
-
     int getPlayer1Score() const;
     int getPlayer2Score() const;
 
-    void initlizeScore();
+    void initializeScore();
 
     void drawScore(sf::RenderWindow &window);
 
