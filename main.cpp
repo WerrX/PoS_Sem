@@ -4,6 +4,7 @@
 #include "ui/ModeSelect.h"
 #include "game/Multiplayer.h"
 
+
 bool getRandomBoolean() {
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -54,6 +55,7 @@ int main()
             exit = true;
         }
     }
+    window.close();
 
     return 0;
 }
