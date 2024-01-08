@@ -1,0 +1,1 @@
+Ak bude problém pri buildnutí projektu je dosť možné, že je problém s toolchain, treba si stiahnuť z https://www.sfml-dev.org/download/sfml/2.6.1/ toto WinLibs MSVCRT 13.1.0 (64-bit) a linknúť extraktovanú zložku do toolchain
