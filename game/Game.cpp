@@ -45,21 +45,21 @@ Direction Game::translateDirection(sf::Keyboard::Key &keyPressed, int playerInde
 }
 
 void Game::setPlayer1Score(int score) {
-    this-> gameState.player1.score += score;
+    this->gameState.player1.score += score;
 }
 void Game::setPlayer2Score(int score) {
-    this-> gameState.player2.score += score;
+    this->gameState.player2.score += score;
 }
 int Game::getPlayer1Score() const {
-    return this-> gameState.player1.score ;
+    return this->gameState.player1.score ;
 }
 int Game::getPlayer2Score() const {
-    return this-> gameState.player2.score;
+    return this->gameState.player2.score;
 }
 
 bool Game::endGame(int endScore) {
-    const std::string& winnerMessage = (gameState.player1.score == endScore) ? "Player2 wins!" :
-                                       (gameState.player2.score == endScore) ? "Player1 wins!" : "";
+    const std::string& winnerMessage = (this->gameState.player1.score == endScore) ? "Player2 wins!" :
+                                       (this->gameState.player2.score == endScore) ? "Player1 wins!" : "";
 
     if (!winnerMessage.empty()) {
         MessageBoxA(NULL, winnerMessage.c_str(), "EndGame", MB_OK );

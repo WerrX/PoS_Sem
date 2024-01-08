@@ -9,14 +9,12 @@ struct GameState {
     PlayerState &player1;
     PlayerState &player2;
     BallState &ball;
-    pthread_mutex_t windowMutex;
 };
 
 class Game {
 private:
     Ball ball;
 
-   //zmena
     sf::Font font;
     sf::Text player1ScoreText;
     sf::Text player2ScoreText;
@@ -35,8 +33,6 @@ public:
 
     static Direction translateDirection(sf::Keyboard::Key &keyPressed, int playerIndex);
 
-//    virtual bool waitForGameStatus() = 0;
-
     void setPlayer1Score(int score);
     void setPlayer2Score(int score);
 
@@ -48,6 +44,4 @@ public:
     void drawScore(sf::RenderWindow &window);
 
     bool endGame(int endScore);
-
-    bool EndScrean(unsigned char gameIsOver);
 };

@@ -26,7 +26,10 @@ void Multiplayer::start() {
         draw();
 
         this->window.display();
-        if(endGame(1))return;
+        if (endGame(1)) {
+            this->networkManager.closeConnections();
+            return;
+        }
     }
 }
 
